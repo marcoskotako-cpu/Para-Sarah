@@ -20,12 +20,75 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 20px;
+      padding: 20px 12px;
       overflow-x: hidden;
       position: relative;
     }
 
-    /* Floating background hearts */
+    /* Tela de Boas-Vindas / Presente Fechado */
+    .welcome-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #08121e;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      text-align: center;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+
+    .welcome-screen.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .envelope-card {
+      background: rgba(16, 30, 50, 0.9);
+      border: 2px solid #00d2ff;
+      border-radius: 20px;
+      padding: 30px 20px;
+      max-width: 350px;
+      width: 100%;
+      box-shadow: 0 0 30px rgba(0, 210, 255, 0.3);
+      animation: pulseCard 2s infinite ease-in-out;
+    }
+
+    @keyframes pulseCard {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+    }
+
+    .envelope-icon {
+      font-size: 60px;
+      margin-bottom: 15px;
+    }
+
+    .open-btn {
+      margin-top: 20px;
+      background: linear-gradient(45deg, #00c6ff, #0072ff);
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 198, 255, 0.4);
+      transition: transform 0.2s;
+    }
+
+    .open-btn:active {
+      transform: scale(0.95);
+    }
+
+    /* Animação de corações ao fundo */
     .heart-particle {
       position: absolute;
       color: rgba(74, 144, 226, 0.3);
@@ -55,7 +118,7 @@
       backdrop-filter: blur(12px);
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 24px;
-      padding: 30px 24px;
+      padding: 30px 20px;
       text-align: center;
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
       position: relative;
@@ -67,7 +130,6 @@
       margin-bottom: 12px;
       display: inline-block;
       animation: pulse 2s infinite ease-in-out;
-      color: #38ef7d;
       background: -webkit-linear-gradient(#00c6ff, #0072ff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -92,7 +154,19 @@
       margin-bottom: 24px;
     }
 
-    /* Counter Card */
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      color: #00d2ff;
+      margin-top: 28px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    /* Cartão do Contador */
     .counter-card {
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.08);
@@ -133,7 +207,7 @@
       color: #64ffda;
     }
 
-    /* Declaration Text Box */
+    /* Cartão da Declaração */
     .letter-card {
       background: rgba(255, 255, 255, 0.04);
       border-left: 3px solid #00d2ff;
@@ -147,12 +221,12 @@
       white-space: pre-line;
     }
 
-    /* Music Player Embed */
+    /* Música */
     .music-section {
       background: rgba(255, 255, 255, 0.05);
       border-radius: 16px;
       padding: 16px;
-      margin-bottom: 12px;
+      margin-bottom: 24px;
     }
 
     .music-title {
@@ -179,16 +253,156 @@
       border: 0;
     }
 
+    /* Galeria / Carrossel de Fotos */
+    .gallery-container {
+      position: relative;
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 16px;
+      padding: 12px;
+      margin-bottom: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .slide {
+      display: none;
+    }
+
+    .slide.active {
+      display: block;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .slide-img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 12px;
+      background: #112233;
+    }
+
+    .slide-caption {
+      margin-top: 10px;
+      font-size: 13px;
+      color: #e2e8f0;
+      font-style: italic;
+    }
+
+    .gallery-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 12px;
+    }
+
+    .nav-btn {
+      background: rgba(0, 210, 255, 0.2);
+      border: 1px solid #00d2ff;
+      color: #00d2ff;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.2s;
+    }
+
+    .nav-btn:active {
+      transform: scale(0.9);
+      background: #00d2ff;
+      color: #000;
+    }
+
+    .slide-counter {
+      font-size: 12px;
+      color: #8da4c4;
+    }
+
+    /* Linha do Tempo */
+    .timeline {
+      position: relative;
+      padding-left: 20px;
+      border-left: 2px solid rgba(0, 210, 255, 0.3);
+      text-align: left;
+      margin-top: 16px;
+      margin-bottom: 24px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 24px;
+    }
+
+    .timeline-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -27px;
+      top: 4px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #00d2ff;
+      box-shadow: 0 0 10px #00d2ff;
+    }
+
+    .timeline-date {
+      font-size: 11px;
+      color: #64ffda;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .timeline-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 12px;
+      margin-top: 6px;
+    }
+
+    .timeline-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+
+    .timeline-desc {
+      font-size: 12px;
+      color: #a0aec0;
+      line-height: 1.5;
+    }
+
     footer {
       font-size: 12px;
       color: #64748b;
-      margin-top: 16px;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
 
-  <!-- Floating Hearts Background -->
+  <!-- Tela do Presente Fechado -->
+  <div id="welcome-screen" class="welcome-screen">
+    <div class="envelope-card">
+      <div class="envelope-icon">💌</div>
+      <h2 style="font-size: 20px; font-family: 'Playfair Display', serif; margin-bottom: 8px;">Para Sarah</h2>
+      <p style="font-size: 13px; color: #8da4c4;">Você tem uma surpresa especial esperando por você...</p>
+      <button class="open-btn" onclick="openSurprise()">Aperte aqui para abrir ✨</button>
+    </div>
+  </div>
+
   <div id="hearts-container"></div>
 
   <div class="container">
@@ -224,7 +438,7 @@
     <div class="letter-card">
 Não sou muito bom com cartas de amor, mas queria te falar que desde a primeira vez que eu te vi eu via algo diferente em você.
 
-Em um dia qualquer tava sentado no banco, eu, tu, o Rodrigo na cadeira junto com as meninas (Hellen, Sena, Sofia) e o Paulo... e não sei o que foi que você fez, não sei se foi o seu jeito que faz qualquer um ficar mais alegre ou o seu sorriso que me encantou, mas eu sei que naquele dia foi o dia que eu me apaixonar por você.
+Em um dia qualquer tava sentado no banco, eu, tu, o Rodrigo na cadeira junto com as meninas (Hellen, Sena, Sofia) e o Paulo... e não sei o que foi que você fez, não sei se foi o seu jeito que faz qualquer um ficar mais alegre ou o seu sorriso que me encantou, mas eu sei que naquele dia foi o dia que eu me apaixonei por você.
 
 Desde aquele dia eu só quero ter você ao meu lado pro resto da minha vida e pra todo sempre. Quero construir uma família linda com você e ser seu conforto.
 
@@ -237,15 +451,82 @@ Eu te amo muito! ❤️
     <div class="music-section">
       <div class="music-title">🎵 Nossa Música — BK (Planos)</div>
       <div class="iframe-container">
-        <iframe src="https://www.youtube-nocookie.com/embed/3JiMr-HgHJ8?autoplay=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe id="music-player" src="https://www.youtube-nocookie.com/embed/3JiMr-HgHJ8?enablejsapi=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
+    </div>
+
+    <!-- Nossos Momentos (Galeria de Fotos) -->
+    <div class="section-title">📸 Nossos Momentos</div>
+    <div class="gallery-container">
+      
+      <!-- Foto 1 -->
+      <div class="slide active">
+        <img class="slide-img" src="foto1.jpg" alt="Foto 1" onerror="this.src='https://via.placeholder.com/400x260/112233/00d2ff?text=Envie+a+foto1.jpg+no+GitHub'">
+        <div class="slide-caption">"Nosso momento especial ❤️"</div>
+      </div>
+
+      <!-- Foto 2 -->
+      <div class="slide">
+        <img class="slide-img" src="foto2.jpg" alt="Foto 2" onerror="this.src='https://via.placeholder.com/400x260/112233/00d2ff?text=Envie+a+foto2.jpg+no+GitHub'">
+        <div class="slide-caption">"Sorrisos inesquecíveis ✨"</div>
+      </div>
+
+      <!-- Foto 3 -->
+      <div class="slide">
+        <img class="slide-img" src="foto3.jpg" alt="Foto 3" onerror="this.src='https://via.placeholder.com/400x260/112233/00d2ff?text=Envie+a+foto3.jpg+no+GitHub'">
+        <div class="slide-caption">"Sempre juntos 🥰"</div>
+      </div>
+
+      <div class="gallery-nav">
+        <button class="nav-btn" onclick="changeSlide(-1)">❮</button>
+        <div class="slide-counter" id="slide-counter">1 / 3</div>
+        <button class="nav-btn" onclick="changeSlide(1)">❯</button>
+      </div>
+    </div>
+
+    <!-- Nossa História (Linha do Tempo) -->
+    <div class="section-title">⏳ Nossa História</div>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">02 de Setembro de 2026</div>
+        <div class="timeline-card">
+          <div class="timeline-title">O início de tudo ❤️</div>
+          <div class="timeline-desc">O dia em que começamos a nossa jornada juntos.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">Um dia especial</div>
+        <div class="timeline-card">
+          <div class="timeline-title">Nossos passeios e risadas 😊</div>
+          <div class="timeline-desc">Cada momento ao seu lado se torna a minha memória favorita.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">Para o futuro</div>
+        <div class="timeline-card">
+          <div class="timeline-title">Muitos momentos por vir 🚀</div>
+          <div class="timeline-desc">Essa é só a primeira página da história linda que vamos construir juntos.</div>
+        </div>
+      </div>
+
     </div>
 
     <footer>Feito com carinho especialmente para você ✨</footer>
   </div>
 
   <script>
-    // Data de início do namoro/história: 02/09/2026
+    // Função para abrir o presente
+    function openSurprise() {
+      document.getElementById('welcome-screen').classList.add('hidden');
+    }
+
+    // Data de início: 02/09/2026
     const startDate = new Date('2026-09-02T00:00:00');
 
     function updateTimer() {
@@ -273,7 +554,28 @@ Eu te amo muito! ❤️
     setInterval(updateTimer, 1000);
     updateTimer();
 
-    // Animação de corações flutuantes
+    // Carrossel de Fotos
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const slideCounter = document.getElementById('slide-counter');
+
+    function showSlide(index) {
+      if (index >= slides.length) currentSlide = 0;
+      else if (index < 0) currentSlide = slides.length - 1;
+      else currentSlide = index;
+
+      slides.forEach((s, i) => {
+        s.classList.toggle('active', i === currentSlide);
+      });
+
+      slideCounter.innerText = `${currentSlide + 1} / ${slides.length}`;
+    }
+
+    function changeSlide(direction) {
+      showSlide(currentSlide + direction);
+    }
+
+    // Corações Flutuantes
     const heartsContainer = document.getElementById('hearts-container');
     const heartIcons = ['🩵', '💙', '✨', '🤍'];
 
